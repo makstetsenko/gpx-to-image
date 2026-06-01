@@ -1,6 +1,8 @@
 # gpx-to-image
 Convert gpx track to image preview with basic info. 
 
+This script generates image with transparent background so it can be placed over any other image/photo/video.
+
 Inspired by Strava track image when sharing it.
 
 ## Usage
