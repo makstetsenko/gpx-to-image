@@ -27,4 +27,4 @@ python main.py my-gpx-file.gpx "my-title"
 python main.py evening-drive.gpx "Evening drive"
 ```
 
-> ![example image](example.png)
+![example image](example.png)
