@@ -1,0 +1,8 @@
+gpxpy 
+folium 
+geopy 
+staticmap 
+matplotlib
+black
+pydantic
+simplification
