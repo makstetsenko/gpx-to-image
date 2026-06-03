@@ -1,12 +1,15 @@
-import gpx_track_parser
-import image_generator
+import gpx_activity_parser
 import sys
 import pathlib
+import data_layers_generation
+import layout_composing.layout_1 as layout_1
 
 if len(sys.argv) > 1:
     file_path = pathlib.Path(sys.argv[1]).resolve()
 else:
-    raise ValueError("Please provide the path to the GPX file as a command-line argument.")
+    raise ValueError(
+        "Please provide the path to the GPX file as a command-line argument."
+    )
 
 if not file_path.is_file():
     raise ValueError(f"The provided path does not exist or is not a file: {file_path}")
@@ -17,14 +20,18 @@ if file_path.suffix.lower() != ".gpx":
 if len(sys.argv) > 2:
     title = sys.argv[2]
 else:
-    raise ValueError("Please provide a title for the image as a second command-line argument.")
+    raise ValueError(
+        "Please provide a title for the image as a second command-line argument."
+    )
 
-summary = gpx_track_parser.get_gpx_summary_from_file(file_path.as_posix())
+summary = gpx_activity_parser.get_gpx_summary_from_file(file_path.as_posix())
 
-output_image_path = file_path.with_suffix(".png")
-image_generator.generate_image(image_generator.ImageRequest(
-    summary=summary,
-    output_path=output_image_path.as_posix(),
-    title=title
-))
-print(f"Generated image saved to: {output_image_path}")
+output_dir_path = file_path.parent.joinpath(file_path.stem).resolve()
+
+if not output_dir_path.exists():
+    output_dir_path.mkdir(parents=True)
+
+
+layout_path = layout_1.compose_layout(output_dir_path, summary, title)
+
+print(f"Generated image saved to: {layout_path}")

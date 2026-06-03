@@ -1,8 +1,7 @@
 gpxpy 
-folium 
-geopy 
-staticmap 
-matplotlib
+geopy
 black
 pydantic
-simplification
+svgwrite
+cairosvg
+pillow
